@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Sayang 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg-start: #0d0d1a;
+      --dark-bg-end: #1a0a2e;
+      --pink: #ff6b9d;
+      --orange: #ffb347;
+      --lavender: #c9a0ff;
+      --cream: #fff0f5;
+      --text-main: #ffffff;
+      --text-dark: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--dark-bg-start), var(--dark-bg-end));
+      color: var(--text-main);
+      font-family: 'Lato', sans-serif;
+      overflow: hidden; /* Mengunci scroll utama body agar tidak bocor */
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .cursive {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .phase {
+      display: none;
+      height: 100vh; /* Tepat satu layar penuh di semua device */
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .phase.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    button.btn-primary {
+      background: linear-gradient(45deg, var(--pink), var(--orange));
+      border: none;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.2rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+      z-index: 10;
+    }
+
+    button.btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 107, 157, 0.8);
+    }
+
+    /* FASE 1: COVER */
+    #phase1 {
+      background: linear-gradient(135deg, #0E29A0, #0A2EC1);
+    }
+
+    #phase1 .btn-primary {
+      background: linear-gradient(45deg, #103FFD, #4062F7);
+      box-shadow: 0 0 15px rgba(16, 63, 253, 0.5);
+    }
+
+    #phase1 .btn-primary:hover {
+      box-shadow: 0 0 25px rgba(16, 63, 253, 0.8);
+    }
+
+    .hero-logo-wrapper {
+      margin-bottom: 20px;
+      animation: slideUp 1s ease forwards, floatHover 4s infinite ease-in-out;
+      opacity: 0;
+    }
+    
+    .hero-logo {
+      animation: heartbeat 1.5s infinite ease-in-out;
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    }
+    
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.15); }
+      60% { transform: scale(1); }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    #phase1 h1 {
+      font-size: 3.5rem;
+      margin-bottom: 5px;
+      text-align: center;
+      animation: slideUp 1.5s ease forwards;
+      color: #F9E28A;
+      text-shadow: 0 0 20px rgba(249, 226, 138, 0.4);
+      line-height: 1.2;
+    }
+
+    #phase1 h2 {
+      font-size: 1.2rem;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #F9E28A;
+      margin-bottom: 20px;
+      animation: slideUp 1.8s ease forwards;
+      opacity: 0.9;
+    }
+    
+    #phase1 p {
+      font-size: 1.6rem;
+      color: #CEDDFE;
+      margin-bottom: 40px;
+      animation: slideUp 2s ease forwards;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* FASE 2: ATMOSFER */
+    #phase2 {
+      background: linear-gradient(135deg, #0E29A0, #0A2EC1);
+    }
+
+    #phase2 .btn-primary {
+      background: linear-gradient(45deg, #103FFD, #4062F7);
+      box-shadow: 0 0 15px rgba(16, 63, 253, 0.5);
+    }
+
+    #atmosphere-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-el {
+      position: absolute;
+      will-change: transform, opacity;
+    }
+
+    @keyframes floatUpAnim {
+      0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20vh) translateX(20px) rotate(360deg); opacity: 0; }
+    }
+
+    #phase2 .content {
+      z-index: 1;
+      text-align: center;
+      animation: floatHover 4s ease-in-out infinite;
+    }
+
+    @keyframes floatHover {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes floatBox {
+      0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+      50% { transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 30px rgba(0,0,0,0.2); }
+    }
+
+    /* FASE 3: MEMORIES */
+    #phase3 {
+      background: #D2DBFD;
+      color: var(--text-dark);
+    }
+
+    #phase3 h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #0A2EC1;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    @media (min-width: 480px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 768px) {
+      .gallery { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .polaroid {
+      background: white;
+      padding: 10px 10px 20px 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .polaroid p {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.1) !important;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    /* FASE 4 & 5 UTILITIES */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #103FFD;
+      vertical-align: middle;
+      animation: blinkCursor 1s step-end infinite;
+    }
+
+    @keyframes blinkCursor { 50% { opacity: 0; } }
+
+    .buttons-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .btn-yes, .btn-no {
+      padding: 14px 35px;
+      font-size: 1.15rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-no {
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- FASE 1: COVER -->
+  <section id="phase1" class="phase active">
+    <div class="stars" id="stars-container"></div>
+    <div class="hero-logo-wrapper">
+      <svg class="hero-logo" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="url(#gradientHeart)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <defs>
+          <linearGradient id="gradientHeart" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#ffffff" />
+          </linearGradient>
+        </defs>
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="url(#gradientHeart)" fill-opacity="0.3"></path>
+      </svg>
+    </div>
+    <h1>Happy Birthday Sayangggg</h1>
+    <h2>19 Juni 2026</h2>
+    <p class="cursive">ada sesuatu buat adek pinaa🥰🎁</p>
+    <button class="btn-primary" onclick="startExperience()">Buka Hadiah🤍</button>
+  </section>
+
+  <!-- FASE 2: ATMOSFER -->
+  <section id="phase2" class="phase">
+    <div id="atmosphere-container"></div>
+    <div class="content" style="max-width: 600px; width: 90%; padding: 0 10px;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 30px; color: #F9E28A; text-shadow: 0 0 15px rgba(249, 226, 138, 0.3); line-height: 1.3;">
+        Selamat ulang tahun, sayangnya masss🤍
+      </h2>
+      <div class="info-box-animated" style="
+        background: #ffffff;
+        padding: 20px 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        margin-bottom: 35px;
+        animation: floatBox 3s ease-in-out infinite;
+      ">
+        <p style="
+          color: #0A2EC1;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: 1.1rem;
+          line-height: 1.6;
+          margin: 0;
+          font-weight: 500;
+        ">
+          Hari ini semua perhatian harus tertuju ke peannn.. <br>
+          ayokk klik lanjut sayanggg, mass mau pamerin seseorang <br> 
+          yang paling berharga di hidup masss🥰
+        </p>
+      </div>
+      <button class="btn-primary" onclick="nextPhase(3)">Lanjut →</button>
+    </div>
+  </section>
+
+  <!-- FASE 3: MEMORIES -->
+  <section id="phase3" class="phase">
+    <h2 style="font-family: 'Berkshire Swash', serif; font-size: 2.8rem; margin-bottom: 40px; color: #0A2EC1; text-align: center;">
+      Sanah Helwah Sayanggg✨
+    </h2>
+    <div class="gallery" id="gallery-container"></div>
+    <button class="btn-primary" onclick="nextPhase(4)" style="margin-top: 40px; background: linear-gradient(45deg, #103FFD, #4062F7); box-shadow: 0 0 15px rgba(16, 63, 253, 0.5);">Baca Surat dari Mas 💌</button>
+  </section>
+
+  <!-- FASE 4: SURAT UTAMA -->
+  <section id="phase4" class="phase" style="
+    background: url('bg-blue.jpg') no-repeat center center/cover; 
+    position: relative;
+  ">
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(10, 25, 47, 0.4); z-index: 1;"></div>
+    <div class="letter-container" style="
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px dashed #103FFD;
+      padding: 35px 25px;
+      border-radius: 24px;
+      max-width: 550px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      text-align: justify;
+      position: relative;
+      z-index: 2;
+    ">
+      <span style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: #103FFD; padding: 5px 15px; border-radius: 20px; font-size: 1.4rem; box-shadow: 0 5px 15px rgba(16, 63, 253, 0.4);">💌</span>
+      <div id="letter-content" style="
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 1.05rem;
+        color: #1e293b;
+        line-height: 1.8;
+        white-space: pre-wrap;
+        min-height: 300px;
+        font-weight: 500;
+      ">
+        <span class="cursor" id="type-cursor"></span>
+      </div>
+    </div>
+    <button class="btn-primary" id="btn-phase5" onclick="nextPhase(5)" style="
+      display: none; 
+      margin-top: 40px; 
+      background: linear-gradient(45deg, #103FFD, #4062F7); 
+      border: none; 
+      box-shadow: 0 8px 20px rgba(16, 63, 253, 0.4);
+      z-index: 2;
+      padding: 12px 30px;
+      border-radius: 50px;
+      color: #ffffff;
+      font-weight: bold;
+    ">Satu Hal Lagi...</button>
+  </section>
+
+  <!-- FASE 5: TWIST -->
+  <section id="phase5" class="phase" style="
+    background: linear-gradient(135deg, #0E29A0, #0A2EC1);
+  ">
+    <div class="stars" id="stars-phase5" style="opacity: 0.6;"></div>
+    <div id="twist-content" style="
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      padding: 45px 30px;
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 2;
+      animation: floatHover 4s ease-in-out infinite;
+    ">
+      <div style="font-size: 2rem; margin-bottom: 15px; animation: heartbeat 1.5s infinite ease-in-out;">💖</div>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.3rem; color: #F9E28A; margin-bottom: 15px; text-shadow: 0 0 15px rgba(249, 226, 138, 0.4); font-weight: 600;">
+        Satu pertanyaan penting...😊
+      </h2>
+      <p class="cursive" style="font-size: 1.8rem; color: #CEDDFE; margin-bottom: 40px; text-shadow: 1px 1px 5px rgba(0,0,0,0.3);">
+        Ayangg sayang masss kannn?🙂
+      </p>
+      <div class="buttons-container" style="margin: 0 auto; min-height: 80px;">
+        <button class="btn-yes" onclick="sayYes()" style="
+          background: linear-gradient(45deg, #103FFD, #4062F7); 
+          color: white; 
+          box-shadow: 0 0 20px rgba(16, 63, 253, 0.6);
+        ">Iya dong 🤍</button>
+        <button class="btn-no" id="btn-no" style="
+          background: rgba(255, 255, 255, 0.15); 
+          color: rgba(255, 255, 255, 0.7); 
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(5px);
+        ">Enggak</button>
+      </div>
+    </div>
+    <div id="final-message" class="cursive" style="
+      display: none; 
+      font-size: 2.8rem; 
+      color: #F9E28A; 
+      text-align: center; 
+      z-index: 2; 
+      margin-top: 30px;
+      text-shadow: 0 0 25px rgba(249, 226, 138, 0.6);
+    ">Aku tau kok 😌✨</div>
+  </section>
+
+  <script>
+    // --- UTILITIES MANAJEMEN HALAMAN ---
+    function nextPhase(phaseNum) {
+      document.querySelectorAll('.phase').forEach(p => {
+        p.classList.remove('active');
+        p.style.overflowY = 'hidden'; // Default kunci scrollbar bawaan
+      });
+      
+      const currentPhase = document.getElementById('phase' + phaseNum);
+      if (currentPhase) {
+        currentPhase.classList.add('active');
+        
+        // Membuka akses scroll eksklusif hanya untuk Fase Galeri & Surat
+        if (phaseNum === 3 || phaseNum === 4) {
+          currentPhase.style.overflowY = 'auto';
+        }
+        
+        if (phaseNum === 2) initAtmosphere();
+        if (phaseNum === 3) initGallery();
+        if (phaseNum === 4) setTimeout(typeLetter, 500);
+      }
+    }
+
+    function startExperience() {
+      nextPhase(2);
+    }
+
+    // --- FASE 1: BINTANG KEDIP ---
+    function createStars(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      for (let i = 0; i < 70; i++) {
+        const star = document.createElement('div');
+        star.style.position = 'absolute';
+        star.style.width = Math.random() * 3 + 'px';
+        star.style.height = star.style.width;
+        star.style.background = 'white';
+        star.style.borderRadius = '50%';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.opacity = Math.random();
+        star.style.animation = `blink ${Math.random() * 2 + 1}s infinite alternate`;
+        container.appendChild(star);
+      }
+    }
+    createStars('stars-container');
+    createStars('stars-phase5');
+
+    // --- FASE 2: ELEMENT TERBANG & INTERAKTIF MOUSE ---
+    let atmosphereInitialized = false;
+    const icons = ['❤️', '🎈', '⭐', '💕', '✨', '🌸'];
+    const floatElements = [];
+
+    function initAtmosphere() {
+      if (atmosphereInitialized) return;
+      atmosphereInitialized = true;
+      const container = document.getElementById('atmosphere-container');
+      
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement('div');
+        el.classList.add('floating-el');
+        el.textContent = icons[Math.floor(Math.random() * icons.length)];
+        
+        const size = Math.floor(Math.random() * (26 - 12 + 1) + 12);
+        el.style.fontSize = size + 'px';
+        el.style.left = Math.random() * 100 + 'vw';
+        
+        const duration = Math.random() * (12 - 6) + 6;
+        const delay = Math.random() * 6;
+        
+        el.style.animation = `floatUpAnim ${duration}s linear ${delay}s infinite`;
+        
+        container.appendChild(el);
+        floatElements.push(el);
+      }
+
+      document.getElementById('phase2').addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        floatElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const elX = rect.left + rect.width / 2;
+          const elY = rect.top + rect.height / 2;
+          
+          const dist = Math.hypot(mouseX - elX, mouseY - elY);
+          if (dist < 100) {
+            const angle = Math.atan2(elY - mouseY, elX - mouseX);
+            const force = (100 - dist) / 100;
+            const pushX = Math.cos(angle) * force * 20;
+            const pushY = Math.sin(angle) * force * 20;
+            
+            el.style.transform = `translate(${pushX}px, ${pushY}px)`;
+            el.style.transition = 'transform 0.2s ease';
+          }
+        });
+      });
+    }
+
+    // --- FASE 3: POLAROID FOTO ADEK PINA ---
+    const photos = [
+      { src: 'foto adek pina/pina 6.jpg', caption: 'Cantik banget, ga ada obat😍' },
+      { src: 'foto adek pina/pina 1.jpg', caption: 'Gemesnya kelewatan🤩' },
+      { src: 'foto adek pina/pina 5.jpg', caption: 'I love this smile💕' },
+      { src: 'foto adek pina/pina 2.jpg', caption: 'Rumah ternyaman🤍' },
+      { src: 'foto adek pina/pina 4.jpg', caption: 'Paling favorit🫠' },
+      { src: 'foto adek pina/pina 3.jpg', caption: 'Milikku✨' }
+    ];
+
+    function initGallery() {
+      const container = document.getElementById('gallery-container');
+      if (container.children.length > 0) return;
+
+      photos.forEach(photo => {
+        const div = document.createElement('div');
+        div.classList.add('polaroid');
+        
+        const rotation = (Math.random() * 8 - 4).toFixed(1);
+        div.style.transform = `rotate(${rotation}deg)`;
+        
+        div.innerHTML = `
+          <img src="${photo.src}" alt="Memory">
+          <p class="cursive">${photo.caption}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // --- FASE 4: SURAT KETIK OTOMATIS ---
+    const letterTemplate = `Sanah Helwah Sayangggg,
+
+Barakallah fii umrik. Di hari yang mulia dan penuh berkah ini, mas mengucapkan Mabruk Alfa Mabruk🥳. Mas bersyukur banget sama Allah karena sudah menghadirkan samean di dunia ini dan mempertemukan samean dengan masss. Makasih yaaaa sayanggg sudah jadi alasan mas buat selalu semangatttt setiap hari, jadi tempat pulang yang paling nyaman, dan selalu sabar sama massss selama ini.
+
+Harapan dan doa mas buat sameann, semogaaaa sameann selalu diberikan kesehatan, rejeki yang berkah dan lancar, umur yang berkah, kebahagiaan yang tidak putus-putus, serta dilancarkan semua urusan baik itu urusan dunia & akhirat dan segala impian yang lagi samean kejar. Semoga Allah selalu menjaga sameann, memberikan petunjuk-Nya, dan mempermudah jalan kita untuk terus saling support dan melangkah bareng ke depannya. Semoga tahun ini jadi yang paling indah, dan semua impian sameaann satu per satu menjadi nyata.
+
+Masss sayang banget sama sameannn karena Allah, hari ini dan seterusnya. Sanah Helwah, sayangnya masss🤍
+
+— Mass❤️`;
+
+    let typeIndex = 0;
+    let isTyping = false;
+    
+    function typeLetter() {
+      if (isTyping) return;
+      isTyping = true;
+      const container = document.getElementById('letter-content');
+      const cursor = document.getElementById('type-cursor');
+      container.innerHTML = '';
+      container.appendChild(cursor);
+      
+      function typeChar() {
+        if (typeIndex < letterTemplate.length) {
+          const char = letterTemplate.charAt(typeIndex);
+          const span = document.createElement('span');
+          span.textContent = char;
+          container.insertBefore(span, cursor);
+          typeIndex++;
+          
+          let delay = 30;
+          if (char === '.' || char === ',' || char === '\n') delay = 400;
+          
+          setTimeout(typeChar, delay);
+        } else {
+          document.getElementById('btn-phase5').style.display = 'inline-block';
+        }
+      }
+      typeChar();
+    }
+
+    // --- FASE 5: TOMBOL ENGGAK MENGHINDAR & CONFETTI ---
+    const btnNo = document.getElementById('btn-no');
+    
+    function moveBtn() {
+      const randomX = (Math.random() * 2 - 1) * 120;
+      const randomY = (Math.random() * 2 - 1) * 120;
+      btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    btnNo.addEventListener('mouseover', moveBtn);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); moveBtn(); });
+
+    function sayYes() {
+      document.getElementById('twist-content').style.display = 'none';
+      document.getElementById('final-message').style.display = 'block';
+      fireConfetti();
+    }
+
+    // --- SISTEM HUJAN CONFETTI ---
+    function fireConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const particles = [];
+      const colors = ['#ff6b9d', '#ffb347', '#c9a0ff', '#ffffff', '#103FFD'];
+      
+      for(let i=0; i<180; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          w: Math.random() * 10 + 5,
+          h: Math.random() * 10 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vy: Math.random() * 4 + 2,
+          vx: Math.random() * 2 - 1,
+          rot: Math.random() * 360,
+          rotSpeed: Math.random() * 8 - 4
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        particles.forEach(p => {
+          p.y += p.vy;
+          p.x += p.vx;
+          p.rot += p.rotSpeed;
+          if (p.y < canvas.height) active = true;
+          
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        });
+        if (active) requestAnimationFrame(render);
+      }
+      render();
+    }
+  </script>
+</body>
+</html>
